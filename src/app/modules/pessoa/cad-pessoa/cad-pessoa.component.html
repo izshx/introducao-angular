@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+    <form fxFlex="60%" fxFlex.xs="100%" [formGroup]="cadForm" (ngSubmit)="confirmar()">
+        <div fxLayout="row" fxLayoutGap="0.5%" fxLayout.xs="column">
+            <div fxFlex="100%">
+                <mat-form-field>
+                    <input formControlName="nome" matInput placeholder="Nome">
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="0.5%" fxLayout.xs="column">
+            <div fxFlex="50%">
+                <mat-form-field>
+                    <input formControlName="idade" matInput placeholder="Idade">
+                </mat-form-field>
+            </div>
+            <div fxFlex="50%">
+                <mat-form-field>
+                    <input formControlName="profissao" matInput placeholder="Profissão">
+                </mat-form-field>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" type="submit">Confirmar</button>
+    </form>
+</div>
