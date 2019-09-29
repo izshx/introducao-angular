@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PessoaService } from '../pessoa.service';
 import { Pessoa } from 'src/app/models/pessoa';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-cad-pessoa',
@@ -15,7 +16,8 @@ export class CadPessoaComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private pessoaService: PessoaService,
-        private _snackBar: MatSnackBar) {
+        private _snackBar: MatSnackBar,
+        private route: ActivatedRoute) {
 
     }
 
@@ -25,12 +27,18 @@ export class CadPessoaComponent implements OnInit {
             idade: [''],
             profissao: ['']
         });
+
+        if (this.hasId()) {
+            let id: number = this.route.snapshot.params.id;
+            this.pessoaService.obterPessoaPorId(id).subscribe(p => {
+                this.cadForm.controls.nome.setValue(p.nome);
+                this.cadForm.controls.idade.setValue(p.idade);
+                this.cadForm.controls.profissao.setValue(p.profissao);
+            });
+        }
     }
 
     confirmar() {
-        console.log(this.cadForm.value.nome);
-        console.log(this.cadForm.value.idade);
-        console.log(this.cadForm.value.profissao);
         let novaPessoa: Pessoa = {
             nome: this.cadForm.value.nome,
             idade: this.cadForm.value.idade,
@@ -40,7 +48,7 @@ export class CadPessoaComponent implements OnInit {
         this.pessoaService.inserirPessoa(novaPessoa).subscribe(r => {
             console.log(r);
             this.abrirSnackBar('Pessoa cadastrada com sucesso!');
-            
+
         });
     }
 
@@ -51,4 +59,7 @@ export class CadPessoaComponent implements OnInit {
         });
     }
 
+    hasId() {
+        return !!this.route.snapshot.params.id;
+    }
 }

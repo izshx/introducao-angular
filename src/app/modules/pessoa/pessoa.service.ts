@@ -10,6 +10,9 @@ export class PessoaService {
     obterPessoas(): Observable<Pessoa[]> {
         return this.httpClient.get<Pessoa[]>('http://localhost:8000/api/pessoas');
     }
+    obterPessoaPorId(id: number): Observable<Pessoa> {
+        return this.httpClient.get<Pessoa>('http://localhost:8000/api/pessoas/'+id);
+    }
 
     inserirPessoa(pessoa: Pessoa) {
         return this.httpClient.post('http://localhost:8000/api/pessoas', pessoa);
@@ -17,6 +20,5 @@ export class PessoaService {
 
     excluirPessoa(id: number) {
         return this.httpClient.delete('http://localhost:8000/api/pessoas/'+id);
-
     }
 }

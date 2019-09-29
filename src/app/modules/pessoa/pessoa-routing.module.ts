@@ -7,7 +7,8 @@ import { CadPessoaComponent } from './cad-pessoa/cad-pessoa.component';
 const routes: Routes = [
     { path: '', redirectTo: 'lista-pessoa', pathMatch: 'full' },
     { path: 'lista-pessoa', component: ListaPessoaComponent },
-    { path: 'cad-pessoa', component: CadPessoaComponent }
+    { path: 'cad-pessoa', component: CadPessoaComponent },
+    { path: 'cad-pessoa/:id', component: CadPessoaComponent }
 ]
 
 @NgModule({
